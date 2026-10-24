@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>关于我们 · LMCD</title>
+<link rel="icon" href="image/favicon.ico" sizes="any">
+<link rel="icon" href="image/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="image/logo-256.png">
+<style>
+  :root{
+    --blue:#1668ff;
+    --blue-600:#0f56e0;
+    --blue-700:#0b44c8;
+    --blue-50:#eef4ff;
+    --blue-100:#dfeaff;
+    --ink:#0f1b33;
+    --ink-2:#2b3b5c;
+    --muted:#6b7c9c;
+    --line:#e3ecfb;
+    --bg:#f6f9ff;
+    --radius:16px;
+    --shadow:0 2px 8px rgba(22,104,255,.06), 0 12px 32px rgba(22,104,255,.08);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+    font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .topbar{
+    position:sticky;top:0;z-index:60;background:rgba(255,255,255,.9);
+    backdrop-filter:saturate(1.6) blur(10px);border-bottom:1px solid var(--line);
+  }
+  .topbar .inner{
+    max-width:1080px;margin:0 auto;padding:12px 20px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
+  .logo img{width:28px;height:28px;border-radius:7px;flex:none;display:block;box-shadow:0 4px 12px rgba(22,104,255,.35)}
+  .spacer{flex:1}
+  .topbtns{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;
+    border-radius:10px;padding:9px 14px;border:1px solid transparent;transition:.18s ease;
+  }
+  .btn-primary{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(22,104,255,.28)}
+  .btn-primary:hover{background:var(--blue-600);text-decoration:none}
+  .btn-ghost{background:#fff;color:var(--blue);border-color:var(--blue-100)}
+  .btn-ghost:hover{background:var(--blue-50);border-color:var(--blue);text-decoration:none}
+  .btn-sm{padding:7px 12px;font-size:13px;border-radius:9px}
+
+  .hero{position:relative;overflow:hidden;background:#fff;border-bottom:1px solid var(--line)}
+  .hero::before{
+    content:"";position:absolute;inset:-120px -10% auto -10%;height:400px;pointer-events:none;
+    background:
+      radial-gradient(600px 220px at 20% 30%, rgba(22,104,255,.14), transparent 70%),
+      radial-gradient(520px 200px at 80% 10%, rgba(79,149,255,.16), transparent 70%);
+  }
+  .hero .inner{position:relative;max-width:1080px;margin:0 auto;padding:44px 20px 34px;text-align:center}
+  .hero .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--blue-50);border:1px solid var(--blue-100);color:var(--blue-700);
+    font-size:12.5px;font-weight:700;padding:5px 14px;border-radius:999px;margin-bottom:14px;
+  }
+  h1{
+    margin:0 0 12px;font-size:32px;font-weight:800;letter-spacing:-.4px;
+    background:linear-gradient(100deg,#0b44c8,var(--blue) 45%,#4f95ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{margin:0 auto;color:var(--muted);max-width:700px;font-size:15.5px}
+  .crumbs{font-size:13px;color:var(--muted);margin-bottom:12px;justify-content:center;display:flex;gap:6px}
+  .crumbs a{color:var(--blue)}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  section.block{margin-top:30px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .sec-head h2{margin:0;font-size:19px;font-weight:800;letter-spacing:-.2px}
+  .sec-head .hint{color:var(--muted);font-size:13px}
+
+  .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .panel h3{margin:0 0 10px;font-size:16.5px;font-weight:800}
+  .panel p{margin:0 0 12px;color:var(--ink-2);font-size:14.5px}
+  .panel p:last-child{margin-bottom:0}
+  .panel ul{margin:0;padding-left:20px;color:var(--ink-2);font-size:14px}
+  .panel li{margin:7px 0}
+  .panel li b{color:var(--ink)}
+
+  .cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .cards2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
+
+  .feature{
+    display:flex;gap:14px;align-items:flex-start;
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;box-shadow:var(--shadow);
+  }
+  .feature .ic{
+    width:42px;height:42px;border-radius:12px;flex:none;
+    background:linear-gradient(135deg,var(--blue),#4f95ff);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    box-shadow:0 4px 12px rgba(22,104,255,.28);
+  }
+  .feature h4{margin:0 0 4px;font-size:15.5px;font-weight:800}
+  .feature p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.6}
+
+  .kv{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .kv:last-child{border-bottom:none}
+  .kv span:first-child{color:var(--muted);flex:none;min-width:110px}
+  .kv span:last-child{text-align:right;color:var(--ink-2);word-break:break-all}
+
+  .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .member{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;text-align:center;box-shadow:var(--shadow);
+  }
+  .member .ava{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 12px;
+    background:linear-gradient(135deg,var(--blue) 0%,#4f95ff 55%,#0b44c8 100%);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:24px;font-weight:800;
+    box-shadow:0 6px 18px rgba(22,104,255,.3);
+  }
+  .member h4{margin:0 0 3px;font-size:15.5px;font-weight:800}
+  .member .role{font-size:12.5px;color:var(--blue);font-weight:700;margin-bottom:8px}
+  .member p{margin:0;font-size:13px;color:var(--muted)}
+
+  .blank{
+    display:inline-block;min-width:150px;padding:3px 10px;border-radius:8px;
+    background:#fbfdff;border:1px dashed var(--blue-100);color:var(--muted);font-size:13px;
+  }
+
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+
+  .notice{
+    background:var(--blue-50);border:1px solid var(--blue-100);border-radius:14px;
+    padding:14px 16px;color:var(--ink-2);font-size:14px;display:flex;gap:10px;align-items:flex-start;
+  }
+  .notice b{color:var(--blue-700)}
+
+  .donate{
+    background:#fff;border:2px solid var(--blue);border-radius:var(--radius);
+    padding:22px;text-align:center;box-shadow:var(--shadow);
+  }
+  .donate h3{margin:0 0 8px;font-size:17px;font-weight:800;color:var(--blue-700)}
+  .donate p{margin:0 0 14px;font-size:14px;color:var(--ink-2)}
+  .donate .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+  .disc{
+    background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue-700);
+    border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);
+    color:var(--ink-2);font-size:13.5px;
+  }
+  .disc h3{margin:0 0 8px;font-size:15.5px;font-weight:800;color:var(--ink)}
+  .disc p{margin:0 0 8px}
+  .disc p:last-child{margin:0}
+
+  .totop{
+    position:fixed;right:24px;bottom:28px;z-index:70;
+    width:46px;height:46px;border-radius:50%;
+    background:#fff;border:1px solid var(--blue-100);color:var(--blue);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:0 6px 20px rgba(22,104,255,.22);
+    opacity:0;visibility:hidden;transform:translateY(14px) scale(.9);
+    transition:opacity .22s ease, transform .22s ease, visibility .22s;
+    padding:0;
+  }
+  .totop.show{opacity:1;visibility:visible;transform:none}
+  .totop:hover{background:var(--blue);border-color:var(--blue);color:#fff;transform:translateY(-2px)}
+  .totop:hover svg{transform:translateY(-1px)}
+  .totop svg{transition:transform .18s ease}
+  .totop:active{transform:translateY(0) scale(.95)}
+
+  footer{margin-top:44px;border-top:1px solid var(--line);background:#fff}
+  footer .inner{
+    max-width:1080px;margin:0 auto;padding:20px 20px 30px;color:var(--muted);font-size:13px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  footer .fr{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+
+  @media (max-width:640px){
+    h1{font-size:25px}
+    .hero .inner{padding:34px 18px 28px}
+    .totop{right:16px;bottom:18px;width:42px;height:42px}
+    .kv{flex-direction:column;gap:2px}
+    .kv span:last-child{text-align:left}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .totop,.totop svg{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="inner">
+    <div class="logo"><img src="image/logo.svg" alt="MC 版本下载站" width="28" height="28"><span>MC 版本下载站</span></div>
+    <div class="spacer"></div>
+    <div class="topbtns">
+      <a class="btn btn-ghost btn-sm" href="index.html">返回首页</a>
+      <a class="btn btn-ghost btn-sm" href="guide.html">使用教程</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="inner">
+    <div class="crumbs"><a href="index.html">首页</a> › 关于我们</div>
+    <div class="badge">Team LiZi · Haoyue1013</div>
+    <h1>关于我们</h1>
+    <p class="sub">下载所有Minecraft版本并导入到启动器</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="block">
+    <div class="sec-head"><h2>关于本站</h2></div>
+    <div class="panel">
+      <p>注：与网易微软麻将无关，中国式家长很神奇吧</p>
+      <p>2026年10月20日下午三点，PCL启动器最新版本宣布了不再提供MC下载功能。</p>
+      <p>虽然各大启动器关闭了下载功能，但补齐文件依旧可用。</p>
+      <ul>
+        <li><b>文件体积小</b>：本网站直接下载的文件均为体积极小的JSON文件，导入启动器补齐文件即可使用。</li>
+        <li><b>官方源直下</b>：均从Mojang官网及镜像源下载，保证文件绝对安全完整。</li>
+        <li><b>有提供教程</b>：我们把「下载之后该怎么做」也录成了逐步图文教程。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sec-head"><h2>本站能做什么</h2><span class="hint"></span></div>
+    <div class="cards2">
+      <div class="feature">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        </div>
+        <div>
+          <h4>全版本覆盖</h4>
+          <p>正式版、快照、预览版、Beta、Alpha 一应俱全，清单实时来自 Mojang，刷新即可看到最新版。</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div>
+          <h4>双源可选</h4>
+          <p>默认走Mojang官方源，也可手动切到 BMCLAPI 国内源。</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div>
+          <h4>逐步图文教程</h4>
+          <p>PCL 2 与 HMCL 两套流程，共 29 张真实截图，从建文件夹到补全文件一步不漏。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sec-head"><h2>数据来源</h2></div>
+    <div class="cards2">
+      <div class="panel">
+        <h3>数据来源</h3>
+        <div class="kv"><span>版本清单</span><span>Mojang 官方 version_manifest_v2</span></div>
+        <div class="kv"><span>游戏文件</span><span>Mojang 官方 / BMCLAPI 镜像</span></div>
+        <div class="kv"><span>图标素材</span><span>站点自制 · 启动器官方图标</span></div>
+        <div class="kv"><span>教程截图</span><span>Windows 步骤记录器实机录制</span></div>
+        <div class="links" style="margin-top:14px">
+          <a class="btn btn-ghost btn-sm" href="https://www.minecraft.net/" target="_blank" rel="noopener">Minecraft 官网</a>
+          <a class="btn btn-ghost btn-sm" href="https://modrinth.com/" target="_blank" rel="noopener">Modrinth</a>
+          <a class="btn btn-ghost btn-sm" href="https://bmclapi2.bangbang93.com/" target="_blank" rel="noopener">BMCLAPI</a>
+        </div>
+      </div>
+  </section>
+
+  <section class="block">
+    <div class="sec-head"><h2>团队</h2><span class="hint">Team LiZi</span></div>
+    <div class="team">
+      <div class="member">
+        <div class="ava">H</div>
+        <h4><span class="" style="min-width:90px"></span>Haoyue1013</h4>
+        <div class="role">发起人</div>
+        <p><span class="" style="min-width:120px"></span></p>
+      </div>
+      <div class="member">
+        <div class="ava">M</div>
+        <h4><span class="" style="min-width:90px">MeteorOfTime</span></h4>
+        <div class="role">开发</div>
+        <p><span class="" style="min-width:120px"></span></p>
+      </div>
+  </section>
+
+  <section class="block">
+    <div class="sec-head"><h2>联系我们</h2></div>
+    <div class="cards2">
+      <div class="panel">
+        <h3>意见反馈</h3>
+        <p>发现版本缺失、下载异常或教程有误，欢迎告诉我们。</p>
+        <div class="kv"><span>邮箱</span><span><span class="" style="min-width:140px"></span>minecraft_lizi@163.com</span></div>
+        <div class="kv"><span>QQ 群</span><span><span class="" style="min-width:140px"></span>1129523996</span></div>
+        <div class="kv"><span>其他</span><span><span class="" style="min-width:140px"></span>www.lizimc.top</span></div>
+      </div>
+      <div class="donate">
+        <h3>支持我们</h3>
+        <p>站点与镜像源的维护需要成本。如果它帮到了你，欢迎请我们喝杯咖啡 ☕</p>
+        <div class="acts">
+          <a class="btn btn-primary btn-sm" href="https://afdian.com" target="_blank" rel="noopener">前往爱发电捐赠</a>
+          <a class="btn btn-ghost btn-sm" href="index.html">回到下载站</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sec-head"><h2>免责声明</h2></div>
+    <div class="disc">
+      <h3>版权与商标</h3>
+      <p>Minecraft 是 Mojang Studios 的商标。本站所有游戏文件版权归 <b>Mojang Studios</b> 所有，我们仅提供官方公开资源的索引与下载通道，不主张任何权利。</p>
+      <p>本站为<b>非官方</b>的第三方公益项目，与 Mojang Studios、Microsoft 及任何启动器开发团队均无隶属或授权关系。</p>
+      <p>请遵守 Mojang 最终用户许可协议（EULA），通过正版渠道启动游戏。下载即代表你已拥有该版本的合法使用权。</p>
+    </div>
+  </section>
+
+</div>
+
+<button class="totop" id="toTop" type="button" aria-label="回到页面顶部" title="回到顶部">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 19V5"/>
+    <path d="M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<footer>
+  <div class="inner">
+    <div>©Team LiZi | @Haoyue1013 | 所有从本站下载的游戏文件都由 Mojang Studios 提供且归其所有，与本站无关。</div>
+    <div class="fr">
+      <a class="btn btn-ghost btn-sm" href="https://www.minecraft.net/" target="_blank" rel="noopener">转至 Minecraft 官网</a>
+      <a class="btn btn-ghost btn-sm" href="https://modrinth.com/" target="_blank" rel="noopener">转至 Modrinth</a>
+      <a class="btn btn-primary btn-sm" href="https://afdian.com" target="_blank" rel="noopener">捐赠我们</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var THRESHOLD = 600;
+  var btn = document.getElementById("toTop");
+  var raf = null;
+  function sync(){
+    raf = null;
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    btn.classList.toggle("show", y > THRESHOLD);
+  }
+  function onScroll(){
+    if(raf === null) raf = requestAnimationFrame(sync);
+  }
+  window.addEventListener("scroll", onScroll, {passive: true});
+  window.addEventListener("resize", onScroll, {passive: true});
+  btn.addEventListener("click", function(){
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({top: 0, behavior: reduce ? "auto" : "smooth"});
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
